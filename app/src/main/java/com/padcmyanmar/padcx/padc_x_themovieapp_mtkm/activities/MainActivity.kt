@@ -11,16 +11,19 @@ import com.padcmyanmar.padcx.padc_x_themovieapp_mtkm.data.vos.*
 import com.padcmyanmar.padcx.padc_x_themovieapp_mtkm.mvp.presenters.MainPresenter
 import com.padcmyanmar.padcx.padc_x_themovieapp_mtkm.mvp.presenters.impls.MainPresenterImpl
 import com.padcmyanmar.padcx.padc_x_themovieapp_mtkm.mvp.views.MainView
+import com.padcmyanmar.padcx.padc_x_themovieapp_mtkm.views.viewpods.EmptyViewPod
 import com.padcmyanmar.padcx.shared.activities.BaseActivity
 import kotlinx.android.synthetic.main.activity_main.*
 
 class MainActivity : BaseActivity(), MainView {
+
 
     private lateinit var mMovieAdapter: MovieAdapter
     private lateinit var mShowcaseAdapter: ShowcaseAdapter
     private lateinit var mBestActorAdapter: BestActorAdapter
     private lateinit var mTopRatedAdapter: TopRatedAdapter
     private lateinit var dynamicViewPagerAdapter: DynamicViewPagerAdapter
+    private lateinit var mEmptyViewPod: EmptyViewPod
     val mPopularMovieModel: PopularMovieModel =
         PopularMovieModelImpl
 
@@ -36,6 +39,9 @@ class MainActivity : BaseActivity(), MainView {
         showGerne(mPopularMovieModel.getGenreMovie())
     }
 
+    override fun onTapTryAgian() {
+        mMainPresenter.onUiReady(this)
+    }
 
     override fun navigateToDetail(id: Int) {
         startActivity(DetailActivity.newItent(this, id))
@@ -66,7 +72,7 @@ class MainActivity : BaseActivity(), MainView {
     }
 
     private fun setUpRecyclerView() {
-
+        mEmptyViewPod = empty_view as EmptyViewPod
 
         mMovieAdapter = MovieAdapter(mMainPresenter)
         val linearLayoutManager = LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false)
@@ -87,6 +93,7 @@ class MainActivity : BaseActivity(), MainView {
         val linearLayoutManager3 = LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false)
         rv_collapse.adapter = mTopRatedAdapter
         rv_collapse.layoutManager = linearLayoutManager3
+        rv_collapse.setEmpytView(mEmptyViewPod)
     }
 
 

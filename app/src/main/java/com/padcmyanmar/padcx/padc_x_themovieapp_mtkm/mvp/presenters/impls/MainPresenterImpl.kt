@@ -11,6 +11,7 @@ import com.padcmyanmar.padcx.padc_x_themovieapp_mtkm.mvp.views.MainView
 class MainPresenterImpl : MainPresenter,
     AbstractBasePresenter<MainView>() {
 
+
     var mPopularMovieModel: PopularMovieModel =
         PopularMovieModelImpl
 
@@ -56,4 +57,5 @@ class MainPresenterImpl : MainPresenter,
     override fun onTapMovieItem(id: Int) {
         mView?.navigateToVideoScreen(id)
     }
+
 }
