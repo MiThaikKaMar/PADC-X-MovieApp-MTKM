@@ -24,10 +24,12 @@ interface PopularMovieApi {
     fun getAllBestActor(@Query(PARAM_API_KEY) apiKey: String): Observable<GetBestActorResponses>
 
     @GET(GET_DISCOVER)
-    fun getDiscover(@Query(PARAM_API_KEY) apiKey: String, @Query(PARAM_KEY) withGenres: Int): Observable<GetDiscoverResponses>
+    fun getDiscover(@Query(PARAM_API_KEY) apiKey: String, @Query(PARAM_KEY) withGenres: Int)
+            : Observable<GetDiscoverResponses>
 
     @GET(GET_DETAIL)
-    fun getDetail(@Path("movie_id") movieId: Int, @Query(PARAM_API_KEY) apiKey: String): Observable<DetailVO>
+    fun getDetail(@Path("movie_id") movieId: Int, @Query(PARAM_API_KEY) apiKey: String)
+            : Observable<DetailVO>
 
     @GET(GET_VIDEO)
     fun getVideo(@Path("MOVIE_ID") movieId: Int, @Query(PARAM_API_KEY) apiKey: String): Observable<GetVideoResponses>
